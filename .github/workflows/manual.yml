@@ -25,6 +25,8 @@ jobs:
     - uses: actions/checkout@v3.3.0
     - name: checkout branch
       run: git checkout -b "${{ github.event.inputs.path }}"
+    - name: set upstream
+      run: git push --set-upstream origin "${{ github.event.inputs.path }}"
     - name: Create folder
       run: mkdir -p "${{ github.event.inputs.path }}/en" && touch "${{ github.event.inputs.path }}/en/en.md"
     - name: Add and Commit
