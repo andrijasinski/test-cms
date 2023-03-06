@@ -18,58 +18,54 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-#   create-branch:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Create Branch
-#       uses: peterjgrainger/action-create-branch@v2.0.1
-#       env:
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#       with:
-#         branch: 'new-content-'
-#         sha: '${{ github.event.pull_request.head.sha }}'
 
   foobar:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3.3.0
-    - name: Add and Commit
-      uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
-      with:
-        # The arguments for the `git add` command (see the paragraph below for more info)
-        # Default: '.'
-        add: '.'
+#     - name: Add and Commit
+#       uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+#       with:
+#         # The arguments for the `git add` command (see the paragraph below for more info)
+#         # Default: '.'
+#         add: '.'
 
-        # Determines the way the action fills missing author name and email. Three options are available:
-        # - github_actor -> UserName <UserName@users.noreply.github.com>
-        # - user_info -> Your Display Name <your-actual@email.com>
-        # - github_actions -> github-actions <email associated with the github logo>
-        # Default: github_actor
-        default_author: github_actor
+#         # Determines the way the action fills missing author name and email. Three options are available:
+#         # - github_actor -> UserName <UserName@users.noreply.github.com>
+#         # - user_info -> Your Display Name <your-actual@email.com>
+#         # - github_actions -> github-actions <email associated with the github logo>
+#         # Default: github_actor
+#         default_author: github_actor
 
-        # Arguments for the git fetch command. If set to false, the action won't fetch the repo.
-        # For more info as to why fetching is usually recommended, please see the "Performance on large repos" FAQ. 
-        # Default: --tags --force
-        fetch: false
+#         # Arguments for the git fetch command. If set to false, the action won't fetch the repo.
+#         # For more info as to why fetching is usually recommended, please see the "Performance on large repos" FAQ. 
+#         # Default: --tags --force
+#         fetch: false
 
-        # The message for the commit.
-        # Default: 'Commit from GitHub Actions (name of the workflow)'
-        message: 'creating new content'
+#         # The message for the commit.
+#         # Default: 'Commit from GitHub Actions (name of the workflow)'
+#         message: 'creating new content'
 
-        # If this input is set, the action will push the commit to a new branch with this name.
-        # Default: ''
-        new_branch: custom-new-branch
+#         # If this input is set, the action will push the commit to a new branch with this name.
+#         # Default: ''
+#         new_branch: custom-new-branch
 
-        # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
-        # Default: true
-        push: true
+#         # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
+#         # Default: true
+#         push: true
+    - name: checkout branch
+      run: git checkout -b "${{ github.event.inputs.path }}"
     - name: Create folder
-      run: mkdir "${{ github.event.inputs.path }}" && mkdir "${{ github.event.inputs.path }}/en" && touch "${{ github.event.inputs.path }}/en/en.md"
-    - name: Open PR
-      uses: vsoch/pull-request-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PULL_REQUEST_BRANCH: "main"
+      run: mkdir -p "${{ github.event.inputs.path }}/en" && touch "${{ github.event.inputs.path }}/en/en.md"
+    - name: commit
+      run: git add . && git commit -m "Committing base structure"
+    - name: push
+      run: git push origin "${{ github.event.inputs.path }}"
+#     - name: Open PR
+#       uses: vsoch/pull-request-action@master
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         PULL_REQUEST_BRANCH: "main"
 
 
   # This workflow contains a single job called "greet"
