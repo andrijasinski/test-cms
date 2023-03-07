@@ -35,7 +35,7 @@ def main():
       bad_directories.append(str(directory))
     
   if len(bad_directories) > 0:
-      print(f"bad dirs path {Path(".") / "bad_dirs.txt"}")
+      print(f'bad dirs path {(Path(".") / "bad_dirs.txt")}')
       with (Path(".") / "bad_dirs.txt").open("w") as f:
         f.write(", ".join(bad_directories))
 
