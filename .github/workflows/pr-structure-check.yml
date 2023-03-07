@@ -35,6 +35,7 @@ jobs:
         id: check
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          BAD_DIRS_PATH: ${GITHUB_WORKSPACE}/.github/bad_dirs.txt
         run: |
           if python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py; then
               echo ok
