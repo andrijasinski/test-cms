@@ -9,13 +9,12 @@ def main():
   
   paths = map(lambda x: Path(x), changed_files)
   metadata_path = list(filter(lambda x: x.name == METADATA_FILENAME, paths))
-  if len(metadata_path) == 0:
-    print(f"No {METADATA_FILENAME} is found, exiting")
-    exit 1
-    
+  
   print(paths)
   print(metadata_path)
   
+  if len(metadata_path) == 0:
+    raise Exception(f"No {METADATA_FILENAME} is found, exiting")
   
 
 if __name__ == "__main__":
