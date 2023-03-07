@@ -13,6 +13,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Print GitHub context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v35
@@ -33,6 +38,10 @@ jobs:
         if: failure()
         uses: thollander/actions-comment-pull-request@v2
         with:
+          comment_tag: pr-check
+          mode: recreate
           message: |
-            Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en` or `en-GB`)! :eyes:
+            Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes!
+            Example: `en` or `en-GB`
+            Commit SHA: ${{ github.sha }}
         
