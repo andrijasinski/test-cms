@@ -27,7 +27,6 @@ def main():
   content_directories = list(filter(lambda x: x.is_dir(), content_root_path.iterdir()))
   print(f"Directories in root content dir: {content_directories}")
   
-#   matches = list(map(lambda x: re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, x.name), content_directories))
   bad_directories = []
   for directory in content_directories:
     match = re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, directory.name)
@@ -35,23 +34,10 @@ def main():
       bad_directories.append(str(directory))
     
   if len(bad_directories) > 0:
-      print(f'bad dirs path {os.getenv("BAD_DIRS_PATH")}')
       with Path(os.getenv("BAD_DIRS_PATH")).open("w") as f:
         f.write(", ".join(bad_directories))
-
-#       with open(os.path.join(os.getcwd(), 'bad_dirs.txt'), 'w') as f:
-#         f.write(", ".join(bad_directories))
       raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
 
 if __name__ == "__main__":
   main()
-#   try:
-#     main()
-#   except:
-#     with open("bad_dirs.txt", "r") as f:
-#       dirs = str(f.read())
-#       print(dirs)
-#       os.environ["GITHUB_ENV"] = f"{os.environ["GITHUB_ENV"]},bad_dirs={dirs}"
-#     raise
-
