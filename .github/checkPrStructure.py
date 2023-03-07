@@ -10,8 +10,8 @@ def main():
   paths = map(lambda x: Path(x), changed_files)
   metadata_path = list(filter(lambda x: x.name == METADATA_FILENAME, paths))
   
-  print(paths)
-  print(metadata_path)
+  print(f"Paths: {paths}")
+  print(f"Metadata paths: {metadata_path}")
   
   if len(metadata_path) == 0:
     raise Exception(f"No {METADATA_FILENAME} is found, exiting")
