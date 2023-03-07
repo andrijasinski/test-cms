@@ -1,5 +1,3 @@
-
-
 REPOSITORY_FOLDER="test-cms"
 
 main () {
@@ -31,8 +29,6 @@ authenticateOnGithub () {
 }
 
 configGit() {
-#     gh auth setup-git
-    git config --global user.email "noreply@bolt.eu"
     git config --global user.name "$TRIGGERING_AUTHOR"
 }
 
