@@ -29,6 +29,7 @@ authenticateOnGithub () {
     unset GITHUB_TOKEN
     gh auth login --with-token < key.t
     rm key.t
+    gh auth status
 }
 
 configGit() {
