@@ -31,10 +31,9 @@ authenticateOnGithub () {
 }
 
 configGit() {
-    echo "Configure git user"
+    gh auth setup-git
 #     git config --global user.email "noreply@bolt.eu"
-    git config --global user.name "$TRIGGERING_AUTHOR"
-    echo "Git user configured"
+#     git config --global user.name "$TRIGGERING_AUTHOR"
 }
 
 changeBranch() {
