@@ -39,7 +39,7 @@ jobs:
           if python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py; then
               echo ok
           else
-              echo "bad_dirs=$(cat bad_dirs.txt)" >> $GITHUB_ENV
+              echo "bad_dirs=$(cat ${GITHUB_WORKSPACE}/.github/bad_dirs.txt)" >> $GITHUB_ENV
               exit 1
           fi
 
