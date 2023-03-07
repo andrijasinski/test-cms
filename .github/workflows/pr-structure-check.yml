@@ -28,3 +28,11 @@ jobs:
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py
+
+      - name: Comment on PR
+        if: failure()
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en` or `en-GB`)! :eyes:
+        
