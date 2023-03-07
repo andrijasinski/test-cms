@@ -15,13 +15,11 @@ main () {
     
     commitChanges
     
-    createPr
-    
 }
 
 configPaths () {
     REPOSITORY_ABS_PATH="$(pwd)/$REPOSITORY_FOLDER"
-    REPOSITORY_NEW_BRANCH="new-content/$CONTENT_PATH"
+    REPOSITORY_NEW_BRANCH="new-content-$CONTENT_PATH-$(date +%s)"
 }
 
 authenticateOnGithub () {
@@ -56,7 +54,7 @@ createDefaultContentStructure() {
 
 commitChanges() {
   cd "$REPOSITORY_ABS_PATH" || exit
-  git add .
+  git add "$CONTENT_PATH"
   git commit -m "$REPOSITORY_NEW_BRANCH"
   git push -f --set-upstream origin "$REPOSITORY_NEW_BRANCH"
 }
