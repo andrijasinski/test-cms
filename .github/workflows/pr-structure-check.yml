@@ -47,8 +47,6 @@ jobs:
       - name: Comment on PR
         if: failure()
         uses: thollander/actions-comment-pull-request@v2
-#         env:
-#           BAD_DIRS: ${{needs.check-pr.outputs.checkoutput}}
         with:
           comment_tag: prcheck
           mode: recreate
