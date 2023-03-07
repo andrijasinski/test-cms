@@ -66,6 +66,6 @@ createPr() {
   echo "PR link $linkToTargetPR"
 }
 
-set -x
+set -ex
 main
 
