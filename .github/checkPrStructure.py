@@ -1,7 +1,9 @@
 import os
+import re
 from pathlib import Path
 
 METADATA_FILENAME = "metadata.yml"
+ALLOWED_LOCALISATION_DIR_NAMES_REGEX = r"^([a-zA-Z]{2})$|^([a-zA-Z]{2}[-_][a-zA-Z]{2})$"
 
 def main():
   changed_files = os.getenv("CHANGED_FILES").split(",")
@@ -22,9 +24,12 @@ def main():
   else:
     content_root_path = metadata_paths[0].parent
     
-  print(f"Files in that dir: {list(content_root_path.iterdir())}")
-    
+  content_directories = list(filter(lambda x: x.is_dir(), content_root_path.iterdir()))
+  print(f"Directories in root content dir: {content_directories}")
   
+  matches = list(map(lambda x: re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, x.name), content_directories))
+  if not all(matches):
+      raise Exception(f"Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
 
 if __name__ == "__main__":
