@@ -38,7 +38,7 @@ jobs:
         if: failure()
         uses: thollander/actions-comment-pull-request@v2
         with:
-          comment_tag: pr-check
+          comment_tag: prcheck
           mode: recreate
           message: |
             Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes!
