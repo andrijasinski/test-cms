@@ -9,11 +9,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-#         with:
-#           repository: andrijasinski/test-cms
-#           token: ${{ secrets.GITHUB_TOKEN }}
-#           path: ./test-cms
-#           fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
@@ -27,16 +22,9 @@ jobs:
 
       - name: Check changed files
         run: |
-          echo "changed: ${{ toJson(steps.changed-files.outputs.all_changed_files) }}"
-
-
-      - name: Check github workspace
-        run: |
-          ls "${GITHUB_WORKSPACE}"
+          echo "changed: ${{ steps.changed-files.outputs.all_changed_files }}"
 
       - name: Check structure
         env:
           CHANGED_FILES: ${{ toJson(steps.changed-files.outputs.all_changed_files) }}
-        run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/checkPrStructure.py"
-          python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py
+        run: python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py
