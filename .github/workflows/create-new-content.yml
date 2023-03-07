@@ -1,0 +1,38 @@
+name: Create new content
+
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 'Content path to root folder'
+        required: true
+
+jobs:
+  create-new-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Server Version
+        uses: actions/checkout@v2
+        with:
+          repository: andrijasinski/test-cms
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./test-cms
+          fetch-depth: 0
+
+      - name: Print GitHub context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+#       - name: Run provisioning script
+#         env:
+#           BEPL_CONFIGLESS_PROXY_GITHUB_TOKEN: ${{ secrets.BEPL_CONFIGLESS_PROXY_GITHUB_TOKEN }}
+#           BEPL_PR_AUTHOR_EMAIL: ${{ github.event.head_commit.author.email }}
+#           BEPL_PR_AUTHOR_NAME: ${{ github.event.head_commit.author.name }}
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           echo "Provisioning script"
+#           chmod +x "${GITHUB_WORKSPACE}/bolt-server/.github/snsSqsProvisioning.sh"
+#           echo "Start provisioning script"
+#           ${GITHUB_WORKSPACE}/bolt-server/.github/snsSqsProvisioning.sh
+#           echo "Provisioning script finished"
