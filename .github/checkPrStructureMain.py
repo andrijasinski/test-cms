@@ -39,6 +39,3 @@ def main():
         f.write(", ".join(bad_directories))
       raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
-
-if __name__ == "__main__":
-  main()
