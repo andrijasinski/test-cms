@@ -16,22 +16,22 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v3
-#       - uses: Stockopedia/action-get-changed-files@v1
-#         id: changed-files
-#         with:
-#           github-token: ${{ secrets.GITHUB_TOKEN }}
-#           ignore: "**/+(.github)"
-#           foldersOnly: true 
-#           format: csv
-#       - name: Echo changed files
-#         run: echo ${{ steps.get_changed.outputs.changed }}
+      - uses: Stockopedia/action-get-changed-files@v1
+        id: changed-files-1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ignore: "**/+(.github)"
+          foldersOnly: true 
+          format: csv
+      - name: Echo changed files
+        run: echo ${{ toJson(steps.changed-files-1) }}
 
       - name: Get changed files
-        id: changed-files
+        id: changed-files-2
         uses: tj-actions/changed-files@v35
         with:
           files_ignore: .github/** # Alternatively using: `docs`
 
       - name: Check changed files
         run: |
-          echo "List all the files that have changed: ${{ toJson(steps.changed-files) }}"
+          echo "List all the files that have changed: ${{ toJson(steps.changed-files-2) }}"
