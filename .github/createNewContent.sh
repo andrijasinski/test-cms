@@ -57,7 +57,7 @@ commitChanges() {
   cd "$REPOSITORY_ABS_PATH" || exit
   git add .
   git commit -m "$REPOSITORY_NEW_BRANCH"
-  git push -f --set-upstream origin "REPOSITORY_NEW_BRANCH"
+  git push -f --set-upstream origin "$REPOSITORY_NEW_BRANCH"
 }
 
 createPr() {
