@@ -35,7 +35,13 @@ jobs:
         id: check
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py || echo "bad_dirs=$(cat bad_dirs.txt)" >> $GITHUB_ENV
+        run: |
+          if python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py; then
+              echo ok
+          else
+              echo "bad_dirs=$(cat bad_dirs.txt)" >> $GITHUB_ENV
+              exit 1
+          fi
 
       - name: Comment on PR
         if: failure()
