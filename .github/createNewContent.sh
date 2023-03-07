@@ -1,4 +1,4 @@
-set -ex
+
 
 REPOSITORY_FOLDER="test-cms"
 
@@ -59,5 +59,6 @@ createPr() {
   linkToTargetPR="$(gh pr create --title "Create new content for path $CONTENT_PATH" --base main --body "This PR is created from workflow")"
 }
 
-
+set -x
+main
 
