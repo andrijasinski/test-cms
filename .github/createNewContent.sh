@@ -44,6 +44,7 @@ changeBranch() {
 createDefaultContentStructure() {
   cd "$REPOSITORY_ABS_PATH" || exit
   mkdir -p "$CONTENT_PATH/en"
+  touch "$CONTENT_PATH/metadata.yml"
   touch "$CONTENT_PATH/en/en.md"
   echo "Your default English content in this file" >> "$CONTENT_PATH/en/en.md"
 }
