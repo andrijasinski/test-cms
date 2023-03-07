@@ -16,7 +16,7 @@ def main():
   if len(metadata_paths) == 0:
     raise Exception(f"The {METADATA_FILENAME} is not found, exiting. The branch should have at least one {METADATA_FILENAME} file in the content root folder.")
     
-  metadata_path = none
+  metadata_path = None
   if len(metadata_paths) > 1:
     metadata_path = min(list(map(lambda x: x.parent, metadata_paths)))
   else:
