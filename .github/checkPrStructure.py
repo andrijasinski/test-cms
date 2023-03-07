@@ -16,13 +16,13 @@ def main():
   if len(metadata_paths) == 0:
     raise Exception(f"The {METADATA_FILENAME} is not found, exiting. The branch should have at least one {METADATA_FILENAME} file in the content root folder.")
     
-  metadata_path = None
+  content_root_path = None
   if len(metadata_paths) > 1:
-    metadata_path = min(list(map(lambda x: x.parent, metadata_paths)))
+    content_root_path = min(list(map(lambda x: x.parent, metadata_paths)))
   else:
-    metadata_path = metadata_paths[0]
+    content_root_path = metadata_paths[0].parent
     
-  print(f"Files in that dir: {list(metadata_path.iterdir())}")
+  print(f"Files in that dir: {list(content_root_path.iterdir())}")
     
   
   
