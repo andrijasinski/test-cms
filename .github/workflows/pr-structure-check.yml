@@ -32,11 +32,11 @@ jobs:
 
       - name: Check github workspace
         run: |
-          echo "changed: ${GITHUB_WORKSPACE} "
+          ls "${GITHUB_WORKSPACE}"
 
       - name: Check structure
         env:
           CHANGED_FILES: ${{ toJson(steps.changed-files.outputs.all_changed_files) }}
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/test-cms/.github/checkPrStructure.py"
-          python ${GITHUB_WORKSPACE}/test-cms/.github/checkPrStructure.py
+          chmod +x "${GITHUB_WORKSPACE}/.github/checkPrStructure.py"
+          python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py
