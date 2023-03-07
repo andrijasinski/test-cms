@@ -47,6 +47,6 @@ if __name__ == "__main__":
     with open("bad_dirs.txt", "r") as f:
       dirs = str(f.read())
       print(dirs)
-      os.environ["GITHUB_OUTPUT"] = dirs
+      os.environ["GITHUB_ENV"] = f"{os.environ["GITHUB_ENV"]},bad_dirs={dirs}"
     raise
 
