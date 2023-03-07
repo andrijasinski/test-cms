@@ -5,11 +5,17 @@ REPOSITORY_FOLDER="test-cms"
 main () {
     configPaths
     
+    configGit
+    
     authenticateOnGithub
     
     changeBranch
     
     createDefaultContentStructure
+    
+    commitChanges
+    
+    createPr
     
 }
 
@@ -57,6 +63,7 @@ commitChanges() {
 createPr() {
   cd "$REPOSITORY_ABS_PATH" || exit
   linkToTargetPR="$(gh pr create --title "Create new content for path $CONTENT_PATH" --base main --body "This PR is created from workflow")"
+  echo "PR link $linkToTargetPR"
 }
 
 set -x
