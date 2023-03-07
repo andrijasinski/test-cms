@@ -27,8 +27,15 @@ def main():
   content_directories = list(filter(lambda x: x.is_dir(), content_root_path.iterdir()))
   print(f"Directories in root content dir: {content_directories}")
   
-  matches = list(map(lambda x: re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, x.name), content_directories))
-  if not all(matches):
+#   matches = list(map(lambda x: re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, x.name), content_directories))
+  bad_directories = []
+  for directory in content_directories:
+    match = re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, directory.name)
+    if not match:
+      bad_directories.append(str(directory))
+    
+  if len(bad_directories) > 0:
+      os.environ['BAD_DIRECTORY_PATHS'] = ", ".join(bad_directories)
       raise Exception(f"Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
 
