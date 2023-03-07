@@ -9,6 +9,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: andrijasinski/test-cms
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./test-cms
+          fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
