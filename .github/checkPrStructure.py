@@ -35,18 +35,19 @@ def main():
       bad_directories.append(str(directory))
     
   if len(bad_directories) > 0:
-      with open('bad_dirs.txt', 'w') as f:
+      with open(os.path.join(__location__, 'bad_dirs.txt'), 'w') as f:
         f.write(", ".join(bad_directories))
       raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
 
 if __name__ == "__main__":
-  try:
-    main()
-  except:
-    with open("bad_dirs.txt", "r") as f:
-      dirs = str(f.read())
-      print(dirs)
-      os.environ["GITHUB_ENV"] = f"{os.environ["GITHUB_ENV"]},bad_dirs={dirs}"
-    raise
+  main()
+#   try:
+#     main()
+#   except:
+#     with open("bad_dirs.txt", "r") as f:
+#       dirs = str(f.read())
+#       print(dirs)
+#       os.environ["GITHUB_ENV"] = f"{os.environ["GITHUB_ENV"]},bad_dirs={dirs}"
+#     raise
 
