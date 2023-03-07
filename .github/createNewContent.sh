@@ -17,7 +17,7 @@ main () {
 
 configPaths () {
     REPOSITORY_ABS_PATH="$(pwd)/$REPOSITORY_FOLDER"
-    REPOSITORY_NEW_BRANCH="new-content-$CONTENT_PATH-$(date +%s)"
+    REPOSITORY_NEW_BRANCH="$TRIGGERING_AUTHOR-$CONTENT_PATH-$(date +%s)"
 }
 
 authenticateOnGithub () {
