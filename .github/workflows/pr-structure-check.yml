@@ -32,7 +32,6 @@ jobs:
         with:
           files_ignore: .github/** # Alternatively using: `docs`
 
-      - name: Run step if any other js file(s) change
-        if: steps.changed-files.outputs.any_changed == 'true'
+      - name: Check changed files
         run: |
-          echo "List all the files that have changed: ${{ steps.changed-files }}"
+          echo "List all the files that have changed: ${{ toJson(steps.changed-files) }}"
