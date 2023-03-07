@@ -18,6 +18,7 @@ main () {
 configPaths () {
     REPOSITORY_ABS_PATH="$(pwd)/$REPOSITORY_FOLDER"
     REPOSITORY_NEW_BRANCH="$TRIGGERING_AUTHOR-$CONTENT_PATH-$(date +%s)"
+    COMMIT_MESSAGE="$TRIGGERING_AUTHOR for $CONTENT_PATH"
 }
 
 authenticateOnGithub () {
@@ -52,7 +53,7 @@ createDefaultContentStructure() {
 commitChanges() {
   cd "$REPOSITORY_ABS_PATH" || exit
   git add "$CONTENT_PATH"
-  git commit -m "$REPOSITORY_NEW_BRANCH"
+  git commit -m "$COMMIT_MESSAGE"
   git push -f --set-upstream origin "$REPOSITORY_NEW_BRANCH"
 }
 
