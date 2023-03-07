@@ -40,14 +40,14 @@ jobs:
       - name: Comment on PR
         if: failure()
         uses: thollander/actions-comment-pull-request@v2
-        env:
-          BAD_DIRS: ${{needs.check-pr.outputs.checkoutput}}
+#         env:
+#           BAD_DIRS: ${{needs.check-pr.outputs.checkoutput}}
         with:
           comment_tag: prcheck
           mode: recreate
           message: |
             Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes!
             Example of allowed directory names: `en` or `en-GB`
-            Bad directories: ${{ env.BAD_DIRS }}
+            Bad directories: ${{ env.bad_dirs }}
             Commit SHA: ${{ github.event.pull_request.head.sha }}
         
