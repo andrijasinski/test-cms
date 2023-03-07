@@ -45,6 +45,8 @@ if __name__ == "__main__":
     main()
   except:
     with open("bad_dirs.txt", "r") as f:
-      os.environ["GITHUB_OUTPUT"] = str(f.read())
+      dirs = str(f.read())
+      print(dirs)
+      os.environ["GITHUB_OUTPUT"] = dirs
     raise
 
