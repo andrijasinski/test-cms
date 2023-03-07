@@ -35,7 +35,7 @@ def main():
       bad_directories.append(str(directory))
     
   if len(bad_directories) > 0:
-      with open(os.path.join(__location__, 'bad_dirs.txt'), 'w') as f:
+      with open(os.path.join(os.getcwd(), 'bad_dirs.txt'), 'w') as f:
         f.write(", ".join(bad_directories))
       raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
