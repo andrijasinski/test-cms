@@ -6,6 +6,8 @@ on:
 jobs:
   check-pr:
     runs-on: ubuntu-latest
+    outputs:
+      checkoutput: ${{ steps.check.outputs.bad_dirs }}
 
     steps:
       - uses: actions/checkout@v3
@@ -33,21 +35,19 @@ jobs:
         id: check
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py
-        
-      - name: Check obj
-        run: |
-          echo "check: ${{ toJson(steps.check) }}"
+        run: python ${GITHUB_WORKSPACE}/.github/checkPrStructure.py && cat bad_dirs.txt >> "$GITHUB_OUTPUT" && rm bad_dirs.txt
 
       - name: Comment on PR
         if: failure()
         uses: thollander/actions-comment-pull-request@v2
+        env:
+          BAD_DIRS: ${{needs.check-pr.outputs.checkoutput}}
         with:
           comment_tag: prcheck
           mode: recreate
           message: |
             Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes!
             Example of allowed directory names: `en` or `en-GB`
-            Bad directories: 
+            Bad directories: ${{ $BAD_DIRS }}
             Commit SHA: ${{ github.event.pull_request.head.sha }}
         
