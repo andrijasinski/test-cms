@@ -7,7 +7,7 @@ def main():
   changed_files = os.getenv("CHANGED_FILES").split(",")
   print(f"Changed files are: {changed_files}")
   
-  paths = map(lambda x: Path(x), changed_files)
+  paths = list(map(lambda x: Path(x), changed_files))
   metadata_path = list(filter(lambda x: x.name == METADATA_FILENAME, paths))
   
   print(f"Paths: {paths}")
