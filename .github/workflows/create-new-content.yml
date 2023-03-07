@@ -25,7 +25,7 @@ jobs:
 
       - name: Run provisioning script
         env:
-          PR_AUTHOR_EMAIL: ${{ github.triggering_actor }}
+          TRIGGERING_AUTHOR: ${{ github.triggering_actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONTENT_PATH: ${{ github.event.inputs.path }}
         run: |
