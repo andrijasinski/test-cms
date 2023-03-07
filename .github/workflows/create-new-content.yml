@@ -23,15 +23,13 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
-      - name: Run provisioning script
+      - name: Create default content structure
         env:
           TRIGGERING_AUTHOR: ${{ github.triggering_actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONTENT_PATH: ${{ github.event.inputs.path }}
         run: |
-          echo $ENV
           echo "Starting script"
           chmod +x "${GITHUB_WORKSPACE}/test-cms/.github/createNewContent.sh"
-          echo "Start provisioning script"
           ${GITHUB_WORKSPACE}/test-cms/.github/createNewContent.sh
           echo "Script finished"
