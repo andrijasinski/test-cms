@@ -26,6 +26,7 @@ configPaths () {
 
 authenticateOnGithub () {
     echo -e "$GITHUB_TOKEN" > key.t
+    unset GITHUB_TOKEN
     gh auth login --with-token < key.t
     rm key.t
 }
