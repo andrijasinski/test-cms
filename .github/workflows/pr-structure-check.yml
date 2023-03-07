@@ -42,6 +42,6 @@ jobs:
           mode: recreate
           message: |
             Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes!
-            Example: `en` or `en-GB`
-            Commit SHA: ${{ github.sha }}
+            Example of allowed directory names: `en` or `en-GB`
+            Commit SHA: ${{ github.event.pull_request.head.sha }}
         
