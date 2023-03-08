@@ -53,7 +53,7 @@ jobs:
           message: |
             Not all directory names are following requirements of [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) or [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) & [ISO3166-1 alpha-2 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)!
             Example of allowed directory names: `en` or `en-GB`
-            Bad directories: ${{ env.bad_dirs }}
+            Bad directories: `${{ env.bad_dirs }}`
 
 #       Commit SHA: ${{ github.event.pull_request.head.sha }}
         
