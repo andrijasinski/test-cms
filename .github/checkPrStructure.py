@@ -38,6 +38,37 @@ def main():
         f.write(", ".join(bad_directories))
       raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
   
+def mainV2():
+  root_dir = Path(os.getenv("GITHUB_WORKSPACE"))
+  bad_directories = iterate_directory(path)
+  if len(bad_directories) > 0:
+    with Path(os.getenv("BAD_DIRS_PATH")).open("w") as f:
+      f.write(", ".join(bad_directories))
+    raise Exception("Not all directory names are following requirements of ISO 639-1 language codes or ISO 639-1 language codes & ISO3166-1 alpha-2 country codes (f.e `en-GB`) ")
+    
+def iterate_directory(path):
+  bad_dirs = []
+  for node in path.iterdir():
+    if node.is_dir() and node.name == ".github":
+      continue
+    elif node.is_dir():
+      bad_dirs += check_directory(node)
+    elif node.name == METADATA_FILENAME:
+      bad_dirs += check_directory_names(node.parent)
+  return bad_dirs
+      
+def check_directory_names(path):
+  content_directories = list(filter(lambda x: x.is_dir(), path.iterdir()))
+  print(f"Checking directories for names: {content_directories}")
+  
+  bad_directories = []
+  for directory in content_directories:
+    match = re.search(ALLOWED_LOCALISATION_DIR_NAMES_REGEX, directory.name)
+    if not match:
+      bad_directories.append(str(directory))
+  return bad_directories
+    
 
+  
 if __name__ == "__main__":
-  main()
+  mainV2()
