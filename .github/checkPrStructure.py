@@ -52,7 +52,7 @@ def iterate_directory(path):
     if node.is_dir() and node.name == ".github":
       continue
     elif node.is_dir():
-      bad_dirs += check_directory(node)
+      bad_dirs += iterate_directory(node)
     elif node.name == METADATA_FILENAME:
       bad_dirs += check_directory_names(node.parent)
   return bad_dirs
