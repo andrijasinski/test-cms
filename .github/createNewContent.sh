@@ -61,7 +61,7 @@ commitChanges() {
 
 createPr() {
   cd "$REPOSITORY_ABS_PATH" || exit
-  linkToTargetPR="$(gh pr create --title "Create new content for path $CONTENT_PATH" --base main --body "This PR is created from workflow" --assignee "$TRIGGERING_AUTHOR")"
+  linkToTargetPR="$(gh pr create --title "$COMMIT_MESSAGE" --base main --body "" --assignee "$TRIGGERING_AUTHOR")"
   echo "PR link $linkToTargetPR"
 }
 
