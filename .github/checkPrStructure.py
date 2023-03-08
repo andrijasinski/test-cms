@@ -40,7 +40,7 @@ def main():
   
 def mainV2():
   root_dir = Path(os.getenv("GITHUB_WORKSPACE"))
-  bad_directories = iterate_directory(path)
+  bad_directories = iterate_directory(root_dir)
   if len(bad_directories) > 0:
     with Path(os.getenv("BAD_DIRS_PATH")).open("w") as f:
       f.write(", ".join(bad_directories))
